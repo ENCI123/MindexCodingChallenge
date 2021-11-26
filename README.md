@@ -1,2 +1,2 @@
 # MindexCodingChallenge
-Complete All CRUD functionalites
+*Complete All CRUD functionalites
