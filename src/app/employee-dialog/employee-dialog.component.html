@@ -81,12 +81,15 @@
         />
       </mat-form-field>
     </p>
-    <mat-dialog-actions
-      (click)="
-        updateEmployeeCompensation(data.reporter, compensation.value, 'edit')
-      "
-    >
-      <button mat-raised-button>SAVE</button>
+    <mat-dialog-actions>
+      <button
+        mat-raised-button
+        (click)="
+          updateEmployeeCompensation(data.reporter, compensation.value, 'edit')
+        "
+      >
+        SAVE
+      </button>
       <button mat-button mat-dialog-close>CANCEL</button>
     </mat-dialog-actions>
   </form>
