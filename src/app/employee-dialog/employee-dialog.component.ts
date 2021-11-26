@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Employee } from "../employee";
 
 @Component({
   selector: "app-employee-dialog",
@@ -14,11 +13,12 @@ export class EmployeeDialogComponent implements OnInit {
 
   ngOnInit() {}
 
+  //handle delete  button click
   deleteReporter(reporter: any, editDelete: String) {
-    //observable
     this.dialogRef.close({ ...reporter, editDelete });
   }
 
+  //handle edit save buton click
   updateEmployeeCompensation(
     reporter: any,
     newCompensation: number,

@@ -30,6 +30,7 @@ export class EmployeeListComponent implements OnInit {
       )
       .subscribe();
   }
+
   getAllEmployees() {
     this.employeeService
       .getAll()
@@ -41,28 +42,30 @@ export class EmployeeListComponent implements OnInit {
       .subscribe();
   }
 
+  //process the data from emitter:delete, delete the target employee
   handleDeleteRequest(employee) {
     this.employeeService
       .save(employee)
       .pipe(catchError(this.handleError.bind(this)))
       .subscribe(() => {
         const editDelete = "deleted";
-        // open delete confirmation dialog after successfull delete
+        // open delete confirmation dialog after successfully delete the target employee
         this.dialog.open(EmployeeDialogComponent, {
           data: { ...employee, editDelete },
         });
-        //get the updated data after service call
         setTimeout(() => this.dialog.closeAll(), 880);
+        //get the updated data after service call
         this.getAllEmployees();
       });
   }
-  async handleEditRequest(employee) {
+  //process the data emitter:updateCompensation, update the target employee
+  handleEditRequest(employee) {
     this.employeeService
       .save(employee)
       .pipe(catchError(this.handleError.bind(this)))
       .subscribe(() => {
         const editDelete = "editted";
-        // open delete confirmation dialog after successfull delete
+        // open edit confirmation dialog after successfully edit the target employee
         this.dialog.open(EmployeeDialogComponent, {
           data: { ...employee, editDelete },
         });

@@ -3,7 +3,6 @@ import { EmployeeListComponent } from "../employee-list/employee-list.component"
 import { Employee } from "../employee";
 import { MatDialog } from "@angular/material/dialog";
 import { EmployeeDialogComponent } from "../employee-dialog/employee-dialog.component";
-import { Direct } from "protractor/built/driverProviders";
 @Component({
   selector: "app-employee",
   templateUrl: "./employee.component.html",
@@ -11,9 +10,10 @@ import { Direct } from "protractor/built/driverProviders";
 })
 export class EmployeeComponent implements OnInit {
   @Input() employee: Employee;
+  //Emitters share data between employee and employeeList
   @Output() delete = new EventEmitter();
   @Output() updateCompensation = new EventEmitter();
-  //array to store all retrieved employee data
+
   employeesList: Employee[] = [];
   dirReports: object[] = [];
 
@@ -22,15 +22,14 @@ export class EmployeeComponent implements OnInit {
     private employeeList: EmployeeListComponent
   ) {}
 
-  //initialize
+  //get detailed direc reporters info
   ngOnInit(): void {
     this.employeesList = this.employeeList.employees;
     this.get_dir_report_names();
   }
 
+  //display dialog when edit or delete button is clicked
   openDialog(employee: any, reporter: any, editDelete: string): void {
-    // console.log(employee);
-    // console.log(reporter);
     const dialogRef = this.dialog.open(EmployeeDialogComponent, {
       data: { reporter, editDelete },
     });
@@ -44,6 +43,7 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
+  //helper function to handle delete
   deleteDirectReporter(reporter) {
     if (this.employee.directReports.includes(reporter.id)) {
       const idx = this.employee.directReports.indexOf(reporter.id);
@@ -52,8 +52,10 @@ export class EmployeeComponent implements OnInit {
       this.delete.emit(this.employee);
     }
   }
+  //helper function to handle edit
   updateDirectReporterCompensation(reporter) {
     if (this.employee.directReports.includes(reporter.id)) {
+      //send updated employee object
       this.updateCompensation.emit(reporter);
     }
   }
