@@ -1,2 +1,5 @@
 # MindexCodingChallenge
-*Complete All CRUD functionalites
+# What's done?
+- All required CRUD functionalities
+# What's Missing?
+- Unit tests
