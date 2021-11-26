@@ -1,0 +1,9 @@
+<mat-grid-list class="employee-list" cols="1" rowHeight="200px">
+  <mat-grid-tile *ngFor="let emp of employees">
+    <app-employee
+      (delete)="handleDeleteRequest($event)"
+      (updateCompensation)="handleEditRequest($event)"
+      [employee]="emp"
+    ></app-employee>
+  </mat-grid-tile>
+</mat-grid-list>

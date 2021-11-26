@@ -1,0 +1,152 @@
+<mat-card class="employee">
+  <mat-card-header>
+    <mat-card-title
+      >{{ employee.lastName }} {{ employee.firstName }},
+      {{ employee.position }}</mat-card-title
+    >
+    <mat-card-subtitle>
+      <dt>
+        Employee ID:{{ employee.id }} Direct Reports:{{
+          employee.directReports ? employee.directReports.length : 0
+        }}
+      </dt>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <table>
+      <thead>
+        <tr>
+          <th id="reports">Direct Reports:</th>
+          <th id="compnesation">Compensation</th>
+          <th id="edit">Edit</th>
+          <th id="delete">Delete</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="employee.directReports">
+        <tr mat-cell *ngFor="let reporter of dirReports">
+          <td>
+            {{ reporter.firstName }}
+            {{ reporter.lastName }}
+            ,
+            {{ reporter.position }}
+          </td>
+          <td>
+            {{ reporter.compensation }}
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              (click)="openDialog(employee, reporter, 'edit')"
+              mat-flat-button
+              color="black"
+              aria-label="edit_button"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              (click)="openDialog(employee, reporter, 'delete')"
+              mat-flat-button
+              color="black"
+              aria-label="delete_button"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+
+      <tbody
+        *ngIf="!employee.directReports || employee.directReports?.length === 0"
+      >
+        <tr mat-cell>
+          <td>This employee has no reports.</td>
+          <td>N/A</td>
+          <td>N/A</td>
+          <td>N/A</td>
+        </tr>
+      </tbody>
+      <!-- <ng-container
+        *ngIf="!employee.directReports || employee.directReports?.length === 0"
+      >
+        This employee has no reports.
+      </ng-container> -->
+      <!-- <table mat-table class="table table-striped">
+      <th mat-header-cell>Direct Reports:</th>
+      <th mat-header-cell>Operation:</th>
+      <ng-container *ngIf="employee.directReports">
+        <tr mat-cell *ngFor="let reporter of dirReports">
+          {{
+            reporter.firstName
+          }}
+          {{
+            reporter.lastName
+          }}
+          ,
+          {{
+            reporter.position
+          }}
+        </tr>
+      </ng-container> -->
+
+      <!-- <ng-container *ngIf="employee.directReports">
+        <th mat-header-cell>Operation:</th>
+        <tr mat-cell *ngFor="let reporter of dirReports">
+          <button
+            (click)="openDialog(employee, reporter, 'edit')"
+            mat-flat-button
+            color="black"
+            aria-label="edit_button"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            (click)="openDialog(employee, reporter, 'delete')"
+            mat-flat-button
+            color="black"
+            aria-label="delete_button"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </tr>
+      </ng-container> -->
+
+      <!-- <tr>
+        <th mat-header-cell>Direct Reports:</th>
+        <th mat-header-cell>Operation</th>
+      </tr>
+
+      <ng-container *ngIf="employee.directReports">
+        <tr>
+          <td *ngFor="let reporter of dirReports" matColumnDef="expandedDetail">
+            {{ reporter.firstName }}
+            {{ reporter.lastName }}
+            ,
+            {{ reporter.position }}
+          </td>
+          <td>
+            <button
+              (click)="openDialog(employee, reporter, 'edit')"
+              mat-flat-button
+              color="black"
+              aria-label="edit_button"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              (click)="openDialog(employee, reporter, 'delete')"
+              mat-flat-button
+              color="black"
+              aria-label="delete_button"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </ng-container>-->
+    </table>
+  </mat-card-content>
+</mat-card>

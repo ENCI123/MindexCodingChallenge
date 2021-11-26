@@ -1,0 +1,93 @@
+<div *ngIf="data.editDelete === 'deleted'">
+  <div>Deleted successfully</div>
+</div>
+
+<div *ngIf="data.editDelete === 'editted'">
+  <div>Updated successfully</div>
+</div>
+
+<!--Delete Dialog  -->
+<div *ngIf="data.editDelete === 'delete'">
+  <div class="edit-delete-container">
+    <h2 mat-dialog-title>Delete Employee</h2>
+    <mat-dialog-content>
+      <p>
+        Permanently Delete Employee {{ data.reporter.firstName }}
+        {{ data.reporter.lastName }} ?
+      </p>
+      <p>This cannot be undone.</p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button
+        mat-raised-button
+        class="delete-ok"
+        (click)="deleteReporter(data.reporter, 'delete')"
+      >
+        OK
+      </button>
+      <button mat-button mat-dialog-close>CANCEL</button>
+    </mat-dialog-actions>
+  </div>
+</div>
+
+<!--Edit Dialog  -->
+<div *ngIf="data.editDelete === 'edit'">
+  <form class="edit-delete-container">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input
+          matInput
+          placeholder="First Name"
+          [value]="data.reporter.firstName"
+          disabled
+        />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input
+          matInput
+          placeholder="Last Name"
+          [value]="data.reporter.lastName"
+          disabled
+        />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Position</mat-label>
+        <input
+          matInput
+          placeholder="Title"
+          [value]="data.reporter.position"
+          disabled
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Compensation</mat-label>
+        <input
+          matInput
+          placeholder="Compensation"
+          required
+          type="number"
+          [value]="data.reporter.compensation || null"
+          id="compensation"
+          #compensation
+        />
+      </mat-form-field>
+    </p>
+    <mat-dialog-actions
+      (click)="
+        updateEmployeeCompensation(data.reporter, compensation.value, 'edit')
+      "
+    >
+      <button mat-raised-button>SAVE</button>
+      <button mat-button mat-dialog-close>CANCEL</button>
+    </mat-dialog-actions>
+  </form>
+</div>

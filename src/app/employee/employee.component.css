@@ -1,0 +1,34 @@
+.table-header-align-left {
+  text-align: left;
+  justify-content: flex-end;
+}
+.matcard-header-align-left {
+  text-align: left;
+  justify-content: flex-end;
+}
+
+tr.mat-row {
+  /* row border */
+  border: 1px solid #ffa600;
+}
+.mat-card {
+  width: 600px;
+}
+table {
+  width: 600px;
+}
+th {
+  text-align: left;
+}
+
+td {
+  text-align: left;
+}
+
+.mat-card-title {
+  text-align: left;
+}
+.mat-card-header {
+  border-bottom: 1px solid #000;
+  margin-bottom: 1px;
+}
